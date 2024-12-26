@@ -1,0 +1,43 @@
+name: Ubuntu CI
+
+on:
+  pull_request:
+    paths:
+      - '**.c'
+      - '**.h'
+      - '**.i'
+      - '**.in'
+      - '**.sh'
+      - '**.py'
+      - '**.go'
+      - '**.java'
+      - '**.rb'
+      - .github/workflows/ubuntu.yml
+  push:
+
+
+permissions:  # added using https://github.com/step-security/secure-repo
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
+    - run: .github/build.sh ubuntu
+    - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+      with:
+        name: openpace
+        path:
+          openpace*.tar.gz
+
+  build-ape:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
+    - run: .github/build.sh ape
+    - uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
+      with:
+        name: openpace-bin
+        path:
+          openpace-bin
