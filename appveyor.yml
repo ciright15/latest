@@ -2,6 +2,9 @@ version: 1.0.{build}
 
 image: Visual Studio 2019
 
+init:
+  - echo "Initializing the build environment..."
+
 build_script:
+  - echo "Building the project..."
   - echo "Hello, AppVeyor!"
-  - echo "This is a test build."
